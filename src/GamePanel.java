@@ -1,34 +1,76 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.Timer;
 import javax.swing.*;
-public class GamePanel extends JPanel implements Runnable {
-    static final int GAME_WIDTH = 1000;
-    static final int GAME_HEIGHT = 1000;
-    static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
+public class GamePanel extends JPanel implements ActionListener {
+    static final int SCREEN_WIDTH = 600;
+    static final int SCREEN_HEIGHT = 600;
+    static final Dimension SCREEN_SIZE = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
+    static final int UNIT_SIZE = 25;
+    static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
+    static final int DELAY = 75;
+    final int x[] = new int[GAME_UNITS];
+    final int y[] = new int[GAME_UNITS];
+    int bodyParts = 6;
+    int applesEaten;
+    int appleX;
+    int appleY;
+    char direction = 'R';
+    boolean running = false;
+    Timer timer;
+    Random random;
+
     GamePanel()
     {
+        random = new Random();
         this.setFocusable(true);
         this.setPreferredSize(SCREEN_SIZE);
+        this.addKeyListener(new MyKeyAdapter());
+        startGame();
     }
-    public void run()
+    public void startGame()
     {
-        //game loop
-        long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
-        double ns = 1000000000 / amountOfTicks;
-        double delta = 0;
-        while(true)
+
+    }
+    public void paintComponent(Graphics g)
+    {
+
+    }
+    public void draw(Graphics g)
+    {
+
+    }
+    public void newApple()
+    {
+
+    }
+    public void move()
+    {
+
+    }
+    public void checkApple()
+    {
+
+    }
+    public void checkCollisions()
+    {
+
+    }
+    public void gameOver(Graphics g)
+    {
+
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    public class MyKeyAdapter extends KeyAdapter{
+        @Override
+        public void keyPressed(KeyEvent e)
         {
-            long now = System.nanoTime();
-            delta += (now - lastTime) / ns;
-            lastTime = now;
-            if(delta >= 1)
-            {
-                repaint();
-                delta--;
-                //System.out.println("TEST");
-            }
+
         }
     }
 }
