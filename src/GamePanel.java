@@ -5,8 +5,8 @@ import javax.swing.*;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener {
-    static final int SCREEN_WIDTH = 600;
-    static final int SCREEN_HEIGHT = 600;
+    static final int SCREEN_WIDTH = 800;
+    static final int SCREEN_HEIGHT = 800;
     static final Dimension SCREEN_SIZE = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBackground(Color.black);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
+        y[0] = SCREEN_HEIGHT / 2;
         startGame();
     }
     public void startGame()
@@ -47,10 +48,10 @@ public class GamePanel extends JPanel implements ActionListener {
     public void draw(Graphics g)
     {
         if(running) {
-            //for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-                //g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-               // g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
-            //}
+            for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
+                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
+                g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
+            }
             //Draws wire frame
 
             //drawApple
@@ -65,7 +66,7 @@ public class GamePanel extends JPanel implements ActionListener {
                     g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 } else {
                     g.setColor(Color.green);
-                    g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
+                    g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255))); //Colorful snake mode
                     g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 }
             }
@@ -185,25 +186,25 @@ public class GamePanel extends JPanel implements ActionListener {
         {
             switch(e.getKeyCode())
             {
-                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A:
                     if(direction != 'R')
                     {
                         direction = 'L';
                     }
                     break;
-                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D:
                     if(direction != 'L')
                     {
                         direction = 'R';
                     }
                     break;
-                case KeyEvent.VK_UP:
+                case KeyEvent.VK_W:
                     if(direction != 'D')
                     {
                         direction = 'U';
                     }
                     break;
-                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S:
                     if(direction != 'U')
                     {
                         direction = 'D';
