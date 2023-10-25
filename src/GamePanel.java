@@ -13,7 +13,7 @@ public class GamePanel extends JPanel implements ActionListener {
     static final int DELAY = 75;
     final int x[] = new int[GAME_UNITS];
     final int y[] = new int[GAME_UNITS];
-    int bodyParts = 6;
+    int bodyParts = 200;
     int applesEaten;
     int appleX;
     int appleY;
@@ -49,8 +49,8 @@ public class GamePanel extends JPanel implements ActionListener {
     {
         if(running) {
             for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-                g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
+                //g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
+                //g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
             }
             //Draws wire frame
 
@@ -64,9 +64,12 @@ public class GamePanel extends JPanel implements ActionListener {
                 if (i == 0) {
                     g.setColor(Color.white);
                     g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                } else if (i % 2 == 0) {
+                    g.setColor(Color.yellow);
+                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 } else {
                     g.setColor(Color.green);
-                    g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255))); //Colorful snake mode
+                    //g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255))); //Colorful snake mode
                     g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 }
             }
@@ -84,6 +87,14 @@ public class GamePanel extends JPanel implements ActionListener {
     {
         appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE)) * UNIT_SIZE;
         appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE)) * UNIT_SIZE;
+
+        for(int i = bodyParts; i > 0; i--) //Checks if food is in snake, Do not set food onto snake
+        {
+            if((appleX == x[i]) && appleY == y[i])
+            {
+                newApple();
+            }
+        }
     }
     public void move()
     {
